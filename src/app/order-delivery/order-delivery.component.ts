@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { CityResponse, GetPackageService, TimeResponse } from '../services/get_package.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-order-delivery',
@@ -22,7 +23,8 @@ export class OrderDeliveryComponent {
   constructor(
     private router: Router,
     private gpService: GetPackageService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private translate: TranslateService
   ) {
     this.form = new FormGroup({
       senderName: new FormControl('', [Validators.required]),
@@ -74,5 +76,15 @@ export class OrderDeliveryComponent {
     const now: Date = new Date();
     if (!d) return false;
     return d.getDay() !== 6 && d.getTime() > now.getTime();
+  }
+
+  getCityName(value: CityResponse) : string {
+    const lang = this.translate.currentLang;
+
+    if (lang == 'he') {
+      return value.heName;
+    }
+
+    return value.enName;
   }
 }

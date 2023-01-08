@@ -15,9 +15,14 @@
             }
 
             &-price {
-                color: #F30045;
+                color: #e01e41;
                 padding-right: 1%;
             }
+        }
+
+        &-button {
+            background-color: #263238 !important;
+            color: #e01e41 !important;
         }
     }
 }

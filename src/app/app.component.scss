@@ -1,0 +1,32 @@
+.toolbar {
+    background-color: #263238;
+    color: #e01e41 !important;
+
+    .spacer {
+        flex: 1 1 auto;
+    }
+
+    &-lang {
+        width: 10%;
+    }
+}
+
+::ng-deep .toolbar .toolbar-lang .mat-mdc-select-value {
+    color: #e01e41 !important;
+}
+
+::ng-deep .mat-mdc-select-panel {
+    background-color: #263238 !important;
+}
+
+::ng-deep .mdc-list-item__primary-text {
+    color: #f4f4f4 !important;
+}
+
+::ng-deep .mdc-list-item--selected .mdc-list-item__primary-text {
+    color: #e01e41 !important;
+}
+
+section[dir = "rtl"] {
+    direction: rtl;
+}

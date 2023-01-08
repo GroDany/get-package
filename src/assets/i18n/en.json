@@ -1,0 +1,37 @@
+{
+    "LOGIN": {
+        "TITLE": "Login",
+        "EMAIL": "Email",
+        "PASSWORD": "Password"
+    },
+    "ORDER": {
+        "TITLE": "Order Delivery",
+        "SENDER": {
+            "NAME": "Sender Name",
+            "PHONE": "Sender Phone Number"
+        },
+        "RECEIVER": {
+            "NAME": "Receiver Name",
+            "PHONE": "Receiver Phone Number"
+        },
+        "PICKUP": {
+            "ADRESS": "Pickup Adress",
+            "CITY": "Pickup City"
+        },
+        "DROPOFF": {
+            "ADRESS": "Drop-off Adress",
+            "CITY": "Drop-off City"
+        },
+        "DELIVERY": {
+            "DATE": "Date of delivery",
+            "HOUR": "Hour of delivery"
+        },
+        "PRICE": {
+            "FINAL": "Final price",
+            "FROM": "From",
+            "IN": "In",
+            "TO": "To"
+        },
+        "SUBMIT": "Submit"
+    }
+}

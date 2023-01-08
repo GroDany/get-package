@@ -1,1 +1,11 @@
-<router-outlet></router-outlet>
+<mat-toolbar class="toolbar">
+    <h1>GetPackage</h1>
+    <span class="spacer"></span>
+    <mat-select class="toolbar-lang" [(value)]="lang">
+        <mat-option value="en" (click)="langChange()">English</mat-option>
+        <mat-option value="he" (click)="langChange()">עִברִית</mat-option>
+    </mat-select>
+</mat-toolbar>
+<section [dir]="getDir()">
+    <router-outlet></router-outlet>
+</section>
