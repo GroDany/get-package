@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
@@ -12,12 +13,12 @@ import { GetPackageService, LoginResponse } from '../services/get_package.servic
 })
 export class LoginComponent implements OnInit {
   token: string = "";
-  error: boolean = false;
 
   constructor(
     private router: Router,
     private gpService: GetPackageService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -34,10 +35,9 @@ export class LoginComponent implements OnInit {
     loginObservable.subscribe(response => {
       switch (response.res) {
         case "unknown request":
-          this.error = true;
+          this.snackBar.open("Wrong Password", "Done!");
           break;
         default:
-          this.error = false;
           this.cookieService.set("Token", response.token);
           this.router.navigate(['order-delivery']);
       }

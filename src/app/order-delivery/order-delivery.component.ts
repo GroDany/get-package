@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { CityResponse, GetPackageService, TimeResponse } from '../services/get_package.service';
 import { TranslateService } from '@ngx-translate/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-order-delivery',
@@ -24,7 +25,8 @@ export class OrderDeliveryComponent {
     private router: Router,
     private gpService: GetPackageService,
     private cookieService: CookieService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private snackBar: MatSnackBar
   ) {
     this.form = new FormGroup({
       senderName: new FormControl('', [Validators.required]),
@@ -66,7 +68,14 @@ export class OrderDeliveryComponent {
     return this.calculatePrice() * 1.17;
   }
 
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action);
+  }
+
   onSubmit() {
+    if (!this.form.valid) {
+      this.openSnackBar("Form incomplete", "Done");
+    }
     this.gpService.submit({ token: this.token }).subscribe(response => {
       console.log(response);
     });
