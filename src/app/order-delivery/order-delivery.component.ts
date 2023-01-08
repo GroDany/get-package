@@ -68,16 +68,13 @@ export class OrderDeliveryComponent {
     return this.calculatePrice() * 1.17;
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action);
-  }
-
   onSubmit() {
     if (!this.form.valid) {
-      this.openSnackBar("Form incomplete", "Done");
+      this.snackBar.open("Form incomplete", "Done");
+      return ;
     }
     this.gpService.submit({ token: this.token }).subscribe(response => {
-      console.log(response);
+      this.snackBar.open("Created", "Done");
     });
   }
 
