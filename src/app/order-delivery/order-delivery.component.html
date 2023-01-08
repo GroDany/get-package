@@ -1,0 +1,75 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="container order-delivery">
+    <h1>Order Delivery</h1>
+    <div class="row">
+        <mat-form-field class="col" appearance="fill">
+            <input matInput placeholder="Sender Name" formControlName="senderName" required>
+        </mat-form-field>
+        <mat-form-field class="col" appearance="fill">
+            <input matInput type="tel" placeholder="Sender Phone Number" formControlName="senderPhoneNumber" required pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$">
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill">
+            <textarea matInput placeholder="Pickup Address" formControlName="pickupAddress" required></textarea>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill" class="city-select">
+            <mat-label>Pickup City</mat-label>
+            <mat-select formControlName="pickupCity" required> 
+                <mat-option *ngFor="let city of cities$ | async" [value]="city">{{ city.enName }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field class="col" appearance="fill">
+            <input matInput placeholder="Receiver Name" formControlName="receiverName" required>
+        </mat-form-field>
+        <mat-form-field class="col" appearance="fill">
+            <input matInput type="tel" placeholder="Receiver Phone Number" formControlName="receiverPhoneNumber" required pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$">
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill">
+            <textarea matInput placeholder="Drop-off Address" formControlName="dropoffAddress" required></textarea>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill" class="city-select">
+            <mat-label>Drop-off City</mat-label>
+            <mat-select  formControlName="dropoffCity" required> 
+                <mat-option *ngFor="let city of cities$ | async" [value]="city">{{ city.enName }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="date row">
+        <mat-form-field>
+            <input [(ngModel)]="date" matInput [matDatepicker]="picker" [matDatepickerFilter]="datesFilter" placeholder="Date of Delivery" formControlName="deliveryDate" required>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker [startAt]="minDate"></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Hour of Delivery" formControlName="deliveryHour" required>
+                <div *ngIf="times$ | async; let times">
+                    <mat-option *ngFor="let time of times[date.getDay()].times" [value]="time">{{ time }}</mat-option>
+                </div>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="submit row">
+        <mat-card class="price-card" *ngIf="form.valid">
+            <mat-card-header>
+                <mat-card-title class="price-card-title">Final price</mat-card-title>
+                <mat-card-subtitle class="price-card-subtitle">From {{ form.controls['pickupAddress'].value }} in {{ form.controls['pickupCity'].value.enName }}</mat-card-subtitle>
+                <mat-card-subtitle class="price-card-subtitle">To {{ form.controls['dropoffAddress'].value }} in {{ form.controls['dropoffCity'].value.enName }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions align="end">
+                <mat-label class="price-card-price">Temporary price : {{ calculatePrice()| currency:'₪ ':'symbol':'1.1-1' }}</mat-label>
+                <mat-label class="price-card-price">VTA : {{ calculateVTA()| currency:'₪ ':'symbol':'1.1-1' }}</mat-label>
+                <mat-label class="price-card-price">Total : {{ calculateAll()| currency:'₪ ':'symbol':'1.1-1' }}</mat-label>
+            </mat-card-actions>
+        </mat-card>
+        <button mat-raised-button type="submit">Submit</button>
+    </div>
+</form>

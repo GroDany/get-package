@@ -1,0 +1,14 @@
+<div class="container login">
+    <h1>Login</h1>
+    <form class="row justify-content-center" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+        <mat-form-field>
+        <input matInput type="email" name="email" ngModel required placeholder="Email">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+        <input matInput type="password" name="password" ngModel required placeholder="Password">
+        </mat-form-field>
+        <br>
+        <button class="login-button" mat-raised-button color="primary" type="submit">Login</button>
+    </form>
+</div>

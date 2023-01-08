@@ -1,0 +1,23 @@
+.order-delivery {
+    .submit {
+        .price-card {
+            background-color: #263238;
+            margin-bottom: 1%;
+            margin-left: 1%;
+            width: 98%;
+
+            &-title {
+                color: #f4f4f4;
+            }
+
+            &-subtitle {
+                color: #f4f4f4;
+            }
+
+            &-price {
+                color: #F30045;
+                padding-right: 1%;
+            }
+        }
+    }
+}
